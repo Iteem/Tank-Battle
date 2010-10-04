@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Tank Battle" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin\Debug\Tank Battle" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DSFML_DYNAMIC" />
+					<Add option="-DSFGUI_DYNAMIC" />
+				</Compiler>
+				<Linker>
+					<Add option="-lsfgui-d" />
+					<Add option="-lyaml-cpp" />
+					<Add option="-lsfml2-network-d" />
+					<Add option="-lsfml2-audio-d" />
+					<Add option="-lsfml2-graphics-d" />
+					<Add option="-lsfml2-window-d" />
+					<Add option="-lsfml2-system-d" />
+					<Add option="-lluabind" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin\Release\Tank Battle" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DSFML_DYNAMIC" />
+					<Add option="-DSFGUI_DYNAMIC" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-lsfgui" />
+					<Add option="-lyaml-cpp" />
+					<Add option="-lsfml2-network" />
+					<Add option="-lsfml2-audio" />
+					<Add option="-lsfml2-graphics" />
+					<Add option="-lsfml2-window" />
+					<Add option="-lsfml2-system" />
+					<Add option="-lluabind" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add directory="src" />
+		</Compiler>
+		<Unit filename="src\baseResourceManager.hpp" />
+		<Unit filename="src\game.cpp" />
+		<Unit filename="src\game.hpp" />
+		<Unit filename="src\imageManager.hpp" />
+		<Unit filename="src\introState.cpp" />
+		<Unit filename="src\introState.hpp" />
+		<Unit filename="src\main.cpp" />
+		<Unit filename="src\shared.cpp" />
+		<Unit filename="src\shared.hpp" />
+		<Unit filename="src\state.hpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
