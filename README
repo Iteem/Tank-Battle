@@ -1,0 +1,15 @@
+Tank Battle
+-----------
+
+Tank Battle is an Open Source artillery game clone. It's
+written in C++ and Lua.
+
+Dependencies:
+-Luabind(and Lua5.1)
+-SFML
+-SFGUI
+-yaml-cpp
+-boost
+
+Tank Battle (c) 2010, Patrick Winkler
+Released under the terms and conditions of the GNU LGPL version 3.

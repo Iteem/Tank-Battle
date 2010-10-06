@@ -3,6 +3,8 @@
 #include "state.hpp"
 
 #include "introState.hpp"
+#include "menuState.hpp"
+
 
 Game::Game(int argc, char **argv)
 {
@@ -26,6 +28,12 @@ int Game::run(void)
         switch(state->update())
         {
             case State::NoChange:
+                break;
+            case State::Menu:
+                state->destroy();
+                delete state;
+                state = new MenuState(shared);
+                state->init();
                 break;
             default:
                 delete state;

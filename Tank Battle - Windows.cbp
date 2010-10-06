@@ -61,6 +61,8 @@
 		<Unit filename="src\introState.cpp" />
 		<Unit filename="src\introState.hpp" />
 		<Unit filename="src\main.cpp" />
+		<Unit filename="src\menuState.cpp" />
+		<Unit filename="src\menuState.hpp" />
 		<Unit filename="src\shared.cpp" />
 		<Unit filename="src\shared.hpp" />
 		<Unit filename="src\state.hpp" />
