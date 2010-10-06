@@ -45,6 +45,8 @@
 		<Unit filename="src\baseResourceManager.hpp" />
 		<Unit filename="src\game.cpp" />
 		<Unit filename="src\game.hpp" />
+		<Unit filename="src\gameState.cpp" />
+		<Unit filename="src\gameState.hpp" />
 		<Unit filename="src\imageManager.hpp" />
 		<Unit filename="src\introState.cpp" />
 		<Unit filename="src\introState.hpp" />

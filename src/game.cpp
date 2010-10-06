@@ -4,7 +4,7 @@
 
 #include "introState.hpp"
 #include "menuState.hpp"
-
+#include "gameState.hpp"
 
 Game::Game(int argc, char **argv)
 {
@@ -29,12 +29,21 @@ int Game::run(void)
         {
             case State::NoChange:
                 break;
+
             case State::Menu:
                 state->destroy();
                 delete state;
                 state = new MenuState(shared);
                 state->init();
                 break;
+
+            case State::Game:
+                state->destroy();
+                delete state;
+                state = new GameState(shared);
+                state->init();
+                break;
+
             default:
                 delete state;
                 return 0;
