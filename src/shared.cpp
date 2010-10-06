@@ -1,5 +1,5 @@
 /*
-   Copyright 20010 Patrick Winkler
+   Copyright 2010 Patrick Winkler
 
    This file is part of Tank Battle
 
