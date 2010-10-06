@@ -49,6 +49,4 @@ State::Next GameState::update(void)
 void GameState::draw(void) const
 {
     app.Clear();
-
-    app.Display();
 }

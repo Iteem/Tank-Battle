@@ -87,6 +87,4 @@ void IntroState::draw(void) const
     app.Draw(logoSFML);
     app.Draw(logoSFGUI);
     app.Draw(logoLua);
-
-    app.Display();
 }

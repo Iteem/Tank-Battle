@@ -50,5 +50,7 @@ int Game::run(void)
         }
 
         state->draw();
+
+        app.Display();
     }
 }

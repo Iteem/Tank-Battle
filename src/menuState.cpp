@@ -97,8 +97,6 @@ void MenuState::draw(void) const
     app.Clear(sf::Color::White);
 
     myGUI->Render(app);
-
-    app.Display();
 }
 
 void MenuState::onQuitClicked(sfg::Widget::Ptr widget)
