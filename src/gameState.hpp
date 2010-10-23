@@ -22,6 +22,12 @@
 
 #include "state.hpp"
 
+#include <lua.hpp>
+
+#include <SFML/Graphics.hpp>
+
+class Terrain;
+
 ///class for the game
 class GameState : public State
 {
@@ -37,6 +43,11 @@ class GameState : public State
 
         virtual Next update(void);       //update the state, return the next state
         virtual void draw(void) const;   //draw everything
+    private:
+        Terrain *myTerrain;
+        lua_State *L;
+
+        sf::Shape background;
 };
 
 #endif // GAMESTATE_HPP_INCLUDED

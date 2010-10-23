@@ -1,6 +1,3 @@
-#ifndef TERRAIN_HPP_INCLUDED
-#define TERRAIN_HPP_INCLUDED
-
 /*
    Copyright 2010 Patrick Winkler
 
@@ -20,5 +17,32 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **/
 
+#ifndef TERRAIN_HPP_INCLUDED
+#define TERRAIN_HPP_INCLUDED
+
+#include <SFML/Graphics.hpp>
+#include <lua.hpp>
+#include <string>
+
+///class for the terrain
+class Terrain : public sf::Drawable
+{
+    public:
+        Terrain(lua_State *ls); //state need to be loaded by luabind and
+                                //registerFunctions must be called
+        ~Terrain();
+
+        static bool registerFunctions(lua_State *L);
+        bool loadFromFile(const std::string &path);
+
+        void SetPixel(int x, int y, sf::Color col);
+    private:
+        void Render(sf::RenderTarget& target, sf::Renderer& renderer) const;
+
+        sf::Image image;
+        sf::Sprite sprite;
+
+        lua_State *L;
+};
 
 #endif // TERRAIN_HPP_INCLUDED

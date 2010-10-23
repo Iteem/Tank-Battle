@@ -18,6 +18,10 @@
 **/
 
 #include "gameState.hpp"
+#include "terrain.hpp"
+
+#include <exception>
+#include <luabind/luabind.hpp>
 
 GameState::GameState(Shared &shared) :
 State(shared)
@@ -29,11 +33,39 @@ GameState::~GameState()
 
 void GameState::init(void)
 {
+    L = lua_open();
+    if(L == NULL)
+    {
+        throw std::runtime_error("Could not open luastate");
+    }
+    luaL_openlibs(L);
+    luabind::open(L);
 
+    luabind::module(L)
+    [
+        luabind::class_<sf::Color>("Color")
+            .def(luabind::constructor<int, int, int, int>())
+            .def_readwrite("r", &sf::Color::r)
+            .def_readwrite("g", &sf::Color::g)
+            .def_readwrite("b", &sf::Color::b)
+            .def_readwrite("a", &sf::Color::a)
+
+    ];
+
+    Terrain::registerFunctions(L);
+    myTerrain = new Terrain(L);
+    myTerrain->loadFromFile("data/game/terrain.lua");
+
+    background.AddPoint(sf::Vector2f(  0,  0), sf::Color::Black);
+    background.AddPoint(sf::Vector2f(800,  0), sf::Color::Black);
+    background.AddPoint(sf::Vector2f(800,600), sf::Color(0, 190, 255));
+    background.AddPoint(sf::Vector2f(  0,600), sf::Color(0, 190, 255));
 }
 
 void GameState::destroy(void)
 {
+    lua_close(L);
+    delete myTerrain;
 }
 
 void GameState::pause(void)
@@ -67,5 +99,8 @@ State::Next GameState::update(void)
 
 void GameState::draw(void) const
 {
-    app.Clear();
+    app.Clear(sf::Color::White);
+
+    app.Draw(background);
+    app.Draw(*myTerrain);
 }

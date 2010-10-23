@@ -24,7 +24,8 @@
 					<Add option="-lsfml2-graphics-d" />
 					<Add option="-lsfml2-window-d" />
 					<Add option="-lsfml2-system-d" />
-					<Add option="-lluabind" />
+					<Add option="-lluabindd" />
+					<Add option="-llua" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -47,6 +48,7 @@
 					<Add option="-lsfml2-window" />
 					<Add option="-lsfml2-system" />
 					<Add option="-lluabind" />
+					<Add option="-llua" />
 				</Linker>
 			</Target>
 		</Build>
@@ -68,6 +70,8 @@
 		<Unit filename="src\shared.cpp" />
 		<Unit filename="src\shared.hpp" />
 		<Unit filename="src\state.hpp" />
+		<Unit filename="src\terrain.cpp" />
+		<Unit filename="src\terrain.hpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
