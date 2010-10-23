@@ -18,6 +18,7 @@
 **/
 
 #include "menuState.hpp"
+#include <SFGUI/Align.hpp>
 
 MenuState::MenuState(Shared &shared) :
 State(shared)

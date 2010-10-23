@@ -22,7 +22,7 @@
 
 #include "state.hpp"
 
-#include <SFGUI/Gui.hpp>
+#include <SFGUI/GUI.hpp>
 #include <SFGUI/Button.hpp>
 
 ///class for the menu
