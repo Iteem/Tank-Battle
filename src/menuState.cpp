@@ -36,7 +36,7 @@ void MenuState::init(void)
 	app.ShowMouseCursor(false);
 
     //create GUI
-    myGUI = new sfg::GUI(sf::FloatRect(0,0,800,600));
+    myGUI = new sfg::GUI(sf::FloatRect(0,0,myShared.videoMode.Width,myShared.videoMode.Height));
     myGUI->LoadSkinFromFile("data/menu/skins/black.skin");
 
     //create Buttons
@@ -50,13 +50,13 @@ void MenuState::init(void)
 		*quitButton,
 		sf::FloatRect(myGUI->GetRect()),
 		sfg::AlignCenter | sfg::AlignBottom,
-		sf::Vector2f( 5, 5 )
+		sf::Vector2f( 0, myShared.videoMode.Height / 20.f )
 	);
     sfg::AlignWidgetInRect(
 		*startButton,
 		sf::FloatRect(myGUI->GetRect()),
 		sfg::AlignCenter | sfg::AlignTop,
-		sf::Vector2f( 5, 5 )
+		sf::Vector2f( 0, myShared.videoMode.Height / 20.f )
 	);
 
 	//and add them to the GUI

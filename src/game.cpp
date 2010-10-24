@@ -35,8 +35,9 @@ Game::~Game()
 
 int Game::run(void)
 {
-    sf::RenderWindow app(sf::VideoMode(800, 600, 32), "Bla");
-    Shared shared(app);
+    sf::VideoMode videoMode(1024, 768, 32);
+    sf::RenderWindow app(videoMode, "Bla");
+    Shared shared(app, videoMode);
     State *state;
 
     state = new IntroState(shared);

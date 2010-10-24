@@ -29,6 +29,9 @@ IntroState::~IntroState()
 
 void IntroState::init(void)
 {
+    sf::Vector2f factor = sf::Vector2f( myShared.videoMode.Width / 800.f,
+                                        myShared.videoMode.Height / 600.f);
+
     sf::Image *tmp;
 
     tmp = IM.get("data/intro/sfmllogo.jpg");
@@ -36,15 +39,16 @@ void IntroState::init(void)
     {
         logoSFML.SetImage(*tmp);
     }
-    logoSFML.SetPosition(150, 400);
-    logoSFML.SetScale(0.75, 0.75);
+    logoSFML.SetPosition(150 * factor.x, 400 * factor.y);
+    logoSFML.SetScale(0.75 * factor.x, 0.75 * factor.y);
 
     tmp = IM.get("data/intro/sfguilogo.png");
     if(tmp != NULL)
     {
         logoSFGUI.SetImage(*tmp);
     }
-    logoSFGUI.SetPosition(400, 150);
+    logoSFGUI.SetPosition(400 * factor.x, 150 * factor.y);
+    logoSFGUI.SetScale(1 * factor.x, 1 * factor.y);
 
 
     tmp = IM.get("data/intro/luabind.png");
@@ -52,7 +56,8 @@ void IntroState::init(void)
     {
         logoLua.SetImage(*tmp);
     }
-    logoLua.SetPosition(50, 50);
+    logoLua.SetPosition(50 * factor.x, 50 * factor.y);
+    logoLua.SetScale(1 * factor.x, 1 * factor.y);
 
     m_Clock.Reset();
 }

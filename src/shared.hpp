@@ -26,10 +26,11 @@
 class Shared
 {
     public:
-        Shared(sf::RenderWindow &window);
+        Shared(sf::RenderWindow &window, sf::VideoMode &VideoMode);
         ~Shared();
 
         sf::RenderWindow &app;
+        sf::VideoMode &videoMode;
 };
 
 #endif // SHARED_HPP_INCLUDED

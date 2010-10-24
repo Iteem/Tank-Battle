@@ -19,8 +19,9 @@
 
 #include "shared.hpp"
 
-Shared::Shared(sf::RenderWindow &window) :
-app(window)
+Shared::Shared(sf::RenderWindow &window, sf::VideoMode &VideoMode) :
+app(window),
+videoMode(VideoMode)
 {
 };
 
