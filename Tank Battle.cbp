@@ -6,9 +6,9 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="Debug">
-				<Option output="bin\Debug\Tank Battle" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj\Debug\" />
+			<Target title="Debug Windows">
+				<Option output="bin/Debug/Tank Battle" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -28,10 +28,10 @@
 					<Add option="-llua" />
 				</Linker>
 			</Target>
-			<Target title="Release">
-				<Option output="bin\Release\Tank Battle" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj\Release\" />
-				<Option type="1" />
+			<Target title="Release Windows">
+				<Option output="bin/Release/Tank Battle" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
@@ -51,27 +51,66 @@
 					<Add option="-llua" />
 				</Linker>
 			</Target>
+			<Target title="Debug Linux">
+				<Option output="bin/Debug/Tank Battle" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add option="-lsfgui" />
+					<Add option="-lyaml-cpp" />
+					<Add option="-lsfml-network" />
+					<Add option="-lsfml-audio" />
+					<Add option="-lsfml-graphics" />
+					<Add option="-lsfml-window" />
+					<Add option="-lsfml-system" />
+					<Add option="-lluabind" />
+				</Linker>
+			</Target>
+			<Target title="Release Linux">
+				<Option output="bin/Release/Tank Battle" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-lsfgui" />
+					<Add option="-lyaml-cpp" />
+					<Add option="-lsfml-network" />
+					<Add option="-lsfml-audio" />
+					<Add option="-lsfml-graphics" />
+					<Add option="-lsfml-window" />
+					<Add option="-lsfml-system" />
+					<Add option="-lluabind" />
+				</Linker>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 			<Add directory="src" />
 		</Compiler>
-		<Unit filename="src\baseResourceManager.hpp" />
-		<Unit filename="src\game.cpp" />
-		<Unit filename="src\game.hpp" />
-		<Unit filename="src\gameState.cpp" />
-		<Unit filename="src\gameState.hpp" />
-		<Unit filename="src\imageManager.hpp" />
-		<Unit filename="src\introState.cpp" />
-		<Unit filename="src\introState.hpp" />
-		<Unit filename="src\main.cpp" />
-		<Unit filename="src\menuState.cpp" />
-		<Unit filename="src\menuState.hpp" />
-		<Unit filename="src\shared.cpp" />
-		<Unit filename="src\shared.hpp" />
-		<Unit filename="src\state.hpp" />
-		<Unit filename="src\terrain.cpp" />
-		<Unit filename="src\terrain.hpp" />
+		<Unit filename="src/baseResourceManager.hpp" />
+		<Unit filename="src/game.cpp" />
+		<Unit filename="src/game.hpp" />
+		<Unit filename="src/gameState.cpp" />
+		<Unit filename="src/gameState.hpp" />
+		<Unit filename="src/imageManager.hpp" />
+		<Unit filename="src/introState.cpp" />
+		<Unit filename="src/introState.hpp" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/menuState.cpp" />
+		<Unit filename="src/menuState.hpp" />
+		<Unit filename="src/shared.cpp" />
+		<Unit filename="src/shared.hpp" />
+		<Unit filename="src/state.hpp" />
+		<Unit filename="src/terrain.cpp" />
+		<Unit filename="src/terrain.hpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
