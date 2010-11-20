@@ -81,16 +81,12 @@ void MenuState::resume(void)
 State::Next MenuState::update(void)
 {
     sf::Event event;
-    while(app.GetEvent(event))
-    {
-        if(event.Type == sf::Event::Closed)
-        {
+    while(app.GetEvent(event)){
+        if(event.Type == sf::Event::Closed){
             return State::Quit;
         }
-        if(event.Type == sf::Event::KeyPressed)
-        {
-            if(event.Key.Code == sf::Key::Escape)
-            {
+        if(event.Type == sf::Event::KeyPressed){
+            if(event.Key.Code == sf::Key::Escape){
                 return State::Quit;
             }
         }
@@ -100,12 +96,10 @@ State::Next MenuState::update(void)
     }
 
     //check if we need to quit or start the game
-    if(start)
-    {
+    if(start){
         return State::Game;
     }
-    if(quit)
-    {
+    if(quit){
         return State::Quit;
     }
 

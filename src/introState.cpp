@@ -35,16 +35,14 @@ void IntroState::init(void)
     sf::Image *tmp;
 
     tmp = IM.get("data/intro/sfmllogo.jpg");
-    if(tmp != NULL)
-    {
+    if(tmp != NULL){
         logoSFML.SetImage(*tmp);
     }
     logoSFML.SetPosition(150 * factor.x, 400 * factor.y);
     logoSFML.SetScale(0.75 * factor.x, 0.75 * factor.y);
 
     tmp = IM.get("data/intro/sfguilogo.png");
-    if(tmp != NULL)
-    {
+    if(tmp != NULL){
         logoSFGUI.SetImage(*tmp);
     }
     logoSFGUI.SetPosition(400 * factor.x, 150 * factor.y);
@@ -52,8 +50,7 @@ void IntroState::init(void)
 
 
     tmp = IM.get("data/intro/luabind.png");
-    if(tmp != NULL)
-    {
+    if(tmp != NULL){
         logoLua.SetImage(*tmp);
     }
     logoLua.SetPosition(50 * factor.x, 50 * factor.y);
@@ -79,25 +76,19 @@ State::Next IntroState::update(void)
     sf::Event event;
     while(app.GetEvent(event))
     {
-        if(event.Type == sf::Event::Closed)
-        {
+        if(event.Type == sf::Event::Closed){
             return State::Quit;
         }
-        if(event.Type == sf::Event::KeyPressed)
-        {
-            if(event.Key.Code == sf::Key::Escape)
-            {
+        if(event.Type == sf::Event::KeyPressed){
+            if(event.Key.Code == sf::Key::Escape){
                 return State::Quit;
-            }
-            else
-            {
+            }else{
                 return State::Menu;
             }
         }
     }
 
-    if(m_Clock.GetElapsedTime() > 2.f)
-    {
+    if(m_Clock.GetElapsedTime() > 2.f){
         return State::Menu;
     }
 

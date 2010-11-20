@@ -35,8 +35,7 @@ GameState::~GameState()
 void GameState::init(void)
 {
     L = lua_open();
-    if(L == NULL)
-    {
+    if(L == NULL){
         throw std::runtime_error("Could not open luastate");
     }
     luaL_openlibs(L);
@@ -62,8 +61,7 @@ void GameState::init(void)
 
     try{
         luabind::call_function<void>(L, "create", boost::ref(myTerrain), myShared.videoMode.Width, myShared.videoMode.Height);
-    }
-    catch(luabind::error &e){
+    }catch(luabind::error &e){
         std::cout << e.what() << ": " << lua_tostring(L, -1) << std::endl;
     }
 
@@ -90,16 +88,12 @@ void GameState::resume(void)
 State::Next GameState::update(void)
 {
     sf::Event event;
-    while(app.GetEvent(event))
-    {
-        if(event.Type == sf::Event::Closed)
-        {
+    while(app.GetEvent(event)){
+        if(event.Type == sf::Event::Closed){
             return State::Quit;
         }
-        if(event.Type == sf::Event::KeyPressed)
-        {
-            if(event.Key.Code == sf::Key::Escape)
-            {
+        if(event.Type == sf::Event::KeyPressed){
+            if(event.Key.Code == sf::Key::Escape){
                 return State::Menu;
             }
         }

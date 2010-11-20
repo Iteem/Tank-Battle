@@ -40,8 +40,7 @@ class BaseResourceManager
         virtual ~BaseResourceManager(void)
         {
             //delete all resources
-            for(typename resMap::iterator it = m_resources.begin(); it != m_resources.end(); ++it)
-            {
+            for(typename resMap::iterator it = m_resources.begin(); it != m_resources.end(); ++it){
                 delete (it->second).first;
             }
         };
@@ -50,13 +49,10 @@ class BaseResourceManager
         {
             typename resMap::iterator it(m_resources.find(path));
 
-            if(it != m_resources.end()) //key found
-            {
+            if(it != m_resources.end()){
                 (it->second).second++;
                 return (it->second).first;
-            }
-            else
-            {
+            }else{
                 return NULL;
             }
         };
@@ -70,11 +66,9 @@ class BaseResourceManager
         {
             typename resMap::iterator it(m_resources.find(path));
 
-            if(it != m_resources.end()) //key found, delete the resource
-            {
+            if(it != m_resources.end()){ //key found, delete the resource
                 (it->second).second--;
-                if((it->second).second < 1)
-                {
+                if((it->second).second < 1){
                     delete (it->second).first;
                     m_resources.erase(it);
                 }

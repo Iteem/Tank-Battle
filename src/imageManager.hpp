@@ -32,8 +32,7 @@ class ImageManager : public ResourceManager<sf::Image>
         virtual sf::Image *load(const std::string &path)
         {
             sf::Image *tmp = new sf::Image;
-            if(!tmp->LoadFromFile(path))
-            {
+            if(!tmp->LoadFromFile(path)){
                 //failed to load image, clean up and return NULL
                 delete tmp;
                 return NULL;

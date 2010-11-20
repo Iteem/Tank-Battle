@@ -49,12 +49,9 @@ class ResourceManager
         {
             typename resMap::iterator it(m_resources.find(path));
 
-            if(it != m_resources.end()) //key found
-            {
+            if(it != m_resources.end()){
                 return it->second;
-            }
-            else //key not found, load resource
-            {
+            }else{ //key not found, load resource{
                 T *ret = baseManager.get(path);
                 if(ret != NULL){
                     m_resources[path] = ret;
@@ -62,12 +59,9 @@ class ResourceManager
                 }
 
                 T *tmp = load(path);
-                if(tmp == NULL) //failed to load resource
-                {
+                if(tmp == NULL){ //failed to load resource
                     return NULL;
-                }
-                else
-                {
+                }else{
                     //add the loaded resource to the map and return it
                     m_resources[path] = tmp;
                     baseManager.add(path, tmp);
@@ -80,8 +74,7 @@ class ResourceManager
         {
             typename resMap::iterator it(m_resources.find(path));
 
-            if(it != m_resources.end()) //key found, delete the resource
-            {
+            if(it != m_resources.end()){ //key found, delete the resource
                 baseManager.free(path);
                 m_resources.erase(it);
             }
@@ -90,8 +83,7 @@ class ResourceManager
         void freeAll(void)
         {
              //delete all resources
-            for(typename resMap::iterator it = m_resources.begin(); it != m_resources.end(); ++it)
-            {
+            for(typename resMap::iterator it = m_resources.begin(); it != m_resources.end(); ++it){
                 baseManager.free(it->first);
             }
             m_resources.clear();

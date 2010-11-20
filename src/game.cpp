@@ -46,10 +46,8 @@ int Game::run(void)
     state = new IntroState(shared);
     state->init();
 
-    while(true)
-    {
-        switch(state->update())
-        {
+    while(true){
+        switch(state->update()){
             case State::NoChange:
                 break;
 
