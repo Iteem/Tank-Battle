@@ -37,6 +37,9 @@ int Game::run(void)
 {
     sf::VideoMode videoMode(1024, 768, 32);
     sf::RenderWindow app(videoMode, "Bla");
+
+    app.UseVerticalSync(true);
+
     Shared shared(app, videoMode);
     State *state;
 

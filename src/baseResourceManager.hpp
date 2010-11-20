@@ -23,12 +23,15 @@
 #include <map>
 #include <string>
 
+#include <utility>
+
 ///virtual base-class for all resourcemanager
 template<typename T>
 class BaseResourceManager
 {
     private:
-        typedef std::map<std::string, T *> resMap;
+        typedef std::pair<T *, int> res;
+        typedef std::map<std::string, res> resMap;
     public:
         BaseResourceManager(void)
         {
@@ -36,7 +39,11 @@ class BaseResourceManager
 
         virtual ~BaseResourceManager(void)
         {
-            freeAll();
+            //delete all resources
+            for(typename resMap::iterator it = m_resources.begin(); it != m_resources.end(); ++it)
+            {
+                delete (it->second).first;
+            }
         };
 
         T *get(const std::string &path)
@@ -45,23 +52,19 @@ class BaseResourceManager
 
             if(it != m_resources.end()) //key found
             {
-                return it->second;
+                (it->second).second++;
+                return (it->second).first;
             }
-            else //key not found, load resource
+            else
             {
-                T *tmp = load(path);
-                if(tmp == NULL) //failed to load resource
-                {
-                    return NULL;
-                }
-                else
-                {
-                    //add the loaded resource to the map and return it
-                    m_resources[path] = tmp;
-                    return tmp;
-                }
+                return NULL;
             }
         };
+
+        void add(const std::string &path, T *res)
+        {
+            m_resources[path] = std::pair<T *, int>(res, 1);
+        }
 
         void free(const std::string &path)
         {
@@ -69,25 +72,16 @@ class BaseResourceManager
 
             if(it != m_resources.end()) //key found, delete the resource
             {
-                delete it->second;
-                m_resources.erase(it);
+                (it->second).second--;
+                if((it->second).second < 1)
+                {
+                    delete (it->second).first;
+                    m_resources.erase(it);
+                }
             }
-        };
-
-        void freeAll(void)
-        {
-             //delete all resources
-            for(typename resMap::iterator it = m_resources.begin(); it != m_resources.end(); ++it)
-            {
-                delete it->second;
-            }
-            m_resources.clear();
         };
 
     private:
-        //the function to load the resource, must be redefined for each type
-        virtual T *load(const std::string &path) = 0;
-
         resMap m_resources;
 };
 

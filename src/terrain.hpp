@@ -28,21 +28,19 @@
 class Terrain : public sf::Drawable
 {
     public:
-        Terrain(lua_State *ls); //state need to be loaded by luabind and
-                                //registerFunctions must be called
+        Terrain(sf::Vector2i dimension); //state need to be loaded by luabind and
+                                         //registerFunctions must be called
         ~Terrain();
 
         static bool registerFunctions(lua_State *L);
-        bool loadFromFile(const std::string &path);
 
-        void SetPixel(int x, int y, sf::Color col);
+        void setPixel(int x, int y, sf::Color col);
+        void fill(int x, int h, sf::Color col);
     private:
         void Render(sf::RenderTarget& target, sf::Renderer& renderer) const;
 
         sf::Image image;
         sf::Sprite sprite;
-
-        lua_State *L;
 };
 
 #endif // TERRAIN_HPP_INCLUDED

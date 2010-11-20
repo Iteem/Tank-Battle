@@ -21,6 +21,7 @@
 #include "terrain.hpp"
 
 #include <exception>
+#include <iostream>
 #include <luabind/luabind.hpp>
 
 GameState::GameState(Shared &shared) :
@@ -53,13 +54,23 @@ void GameState::init(void)
     ];
 
     Terrain::registerFunctions(L);
-    myTerrain = new Terrain(L);
-    myTerrain->loadFromFile("data/game/terrain.lua");
+    myTerrain = new Terrain(sf::Vector2i(myShared.videoMode.Width, myShared.videoMode.Height));
 
-    background.AddPoint(sf::Vector2f(  0,  0), sf::Color::Black);
-    background.AddPoint(sf::Vector2f(800,  0), sf::Color::Black);
-    background.AddPoint(sf::Vector2f(800,600), sf::Color(0, 190, 255));
-    background.AddPoint(sf::Vector2f(  0,600), sf::Color(0, 190, 255));
+    if(luaL_dofile(L, "data/game/terrain.lua")){
+        throw std::runtime_error("Not able to load the script for terrain-generating.");
+    }
+
+    try{
+        luabind::call_function<void>(L, "create", boost::ref(myTerrain), myShared.videoMode.Width, myShared.videoMode.Height);
+    }
+    catch(luabind::error &e){
+        std::cout << e.what() << ": " << lua_tostring(L, -1) << std::endl;
+    }
+
+    background.AddPoint(sf::Vector2f(0, 0), sf::Color::Black);
+    background.AddPoint(sf::Vector2f(myShared.videoMode.Width,  0), sf::Color::Black);
+    background.AddPoint(sf::Vector2f(myShared.videoMode.Width, myShared.videoMode.Height), sf::Color(0, 190, 255));
+    background.AddPoint(sf::Vector2f(0, myShared.videoMode.Height), sf::Color(0, 190, 255));
 }
 
 void GameState::destroy(void)

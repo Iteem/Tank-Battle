@@ -20,10 +20,10 @@
 #ifndef IMAGEMANAGER_HPP_INCLUDED
 #define IMAGEMANAGER_HPP_INCLUDED
 
-#include "baseResourceManager.hpp"
+#include "resourceManager.hpp"
 
 ///the imagemanager
-class ImageManager : public BaseResourceManager<sf::Image>
+class ImageManager : public ResourceManager<sf::Image>
 {
     public:
         ImageManager(void) {};

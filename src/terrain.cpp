@@ -19,14 +19,14 @@
 
 #include "terrain.hpp"
 
-
-#include <iostream>
 #include <luabind/luabind.hpp>
 
 
-Terrain::Terrain(lua_State *ls) :
-L(ls)
+Terrain::Terrain(sf::Vector2i dimension)
 {
+    //create the image
+    image.Create(dimension.x, dimension.y, sf::Color(0, 0, 0, 0));
+    sprite.SetImage(image);
 }
 
 Terrain::~Terrain()
@@ -38,40 +38,26 @@ bool Terrain::registerFunctions(lua_State *L)
     luabind::module(L)
     [
         luabind::class_<Terrain>("Terrain")
-            .def("setPixel", &Terrain::SetPixel)
+            .def("setPixel", &Terrain::setPixel)
+            .def("fill", &Terrain::fill)
     ];
     return true;
 }
 
-bool Terrain::loadFromFile(const std::string &path)
-{
-    //create the image
-    image.Create(800, 600, sf::Color(0, 0, 0, 0));
-    sprite.SetImage(image);
-    sprite.Resize(image.GetWidth(), image.GetHeight()); //manual update of the sprite-size
-
-    if(luaL_dofile(L, "data/game/terrain.lua"))
-    {
-        return false;
-    }
-
-    try
-    {
-        luabind::call_function<void>(L, "create", boost::ref(*this));
-    }
-    catch(luabind::error &e)
-    {
-        std::cout << e.what() << ": " << lua_tostring(L, -1) << std::endl;
-    }
-    return true;
-}
 
 void Terrain::Render(sf::RenderTarget& target, sf::Renderer& renderer) const
 {
     target.Draw(sprite);
 }
 
-void Terrain::SetPixel(int x, int y, sf::Color col)
+void Terrain::setPixel(int x, int y, sf::Color col)
 {
     image.SetPixel(x, y, col);
+}
+
+void Terrain::fill(int x, int h, sf::Color col)
+{
+    for(unsigned int i = h; i < image.GetHeight() - 1; i++){
+        image.SetPixel(x, i, col);
+    }
 }
