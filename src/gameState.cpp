@@ -19,6 +19,7 @@
 
 #include "gameState.hpp"
 #include "terrain.hpp"
+#include "libluagame.hpp"
 
 #include <exception>
 #include <iostream>
@@ -41,19 +42,12 @@ void GameState::init(void)
     luaL_openlibs(L);
     luabind::open(L);
 
-    luabind::module(L)
-    [
-        luabind::class_<sf::Color>("Color")
-            .def(luabind::constructor<int, int, int, int>())
-            .def_readwrite("r", &sf::Color::r)
-            .def_readwrite("g", &sf::Color::g)
-            .def_readwrite("b", &sf::Color::b)
-            .def_readwrite("a", &sf::Color::a)
-
-    ];
-
-    Terrain::registerFunctions(L);
     myTerrain = new Terrain(sf::Vector2i(myShared.videoMode.Width, myShared.videoMode.Height));
+
+    LibLuaGame myLibLuaGame(myTerrain, myShared);
+    myLibLuaGame.registerFunctions(L);
+
+    luabind::globals(L)["Game"] = &myLibLuaGame;
 
     if(luaL_dofile(L, "data/game/terrain.lua")){
         throw std::runtime_error("Not able to load the script for terrain-generating.");

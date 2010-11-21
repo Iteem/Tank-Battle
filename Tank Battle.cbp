@@ -103,6 +103,8 @@
 		<Unit filename="src\imageManager.hpp" />
 		<Unit filename="src\introState.cpp" />
 		<Unit filename="src\introState.hpp" />
+		<Unit filename="src\libluagame.cpp" />
+		<Unit filename="src\libluagame.hpp" />
 		<Unit filename="src\main.cpp" />
 		<Unit filename="src\menuState.cpp" />
 		<Unit filename="src\menuState.hpp" />
