@@ -22,11 +22,14 @@
 #include <luabind/luabind.hpp>
 
 
-Terrain::Terrain(sf::Vector2i dimension)
+Terrain::Terrain(sf::Vector2i dimension) :
+needReload(false)
 {
     //create the image
     image.Create(dimension.x, dimension.y, sf::Color(0, 0, 0, 0));
-    sprite.SetImage(image);
+    tex.SetSmooth(true);
+    tex.LoadFromImage(image);
+    sprite.SetTexture(tex);
 }
 
 Terrain::~Terrain()
@@ -47,12 +50,17 @@ bool Terrain::registerFunctions(lua_State *L)
 
 void Terrain::Render(sf::RenderTarget& target, sf::Renderer& renderer) const
 {
+	if(needReload){
+		tex.LoadFromImage(image);
+		needReload = false;
+	}
     target.Draw(sprite);
 }
 
 void Terrain::setPixel(int x, int y, sf::Color col)
 {
     image.SetPixel(x, y, col);
+    needReload = true;
 }
 
 void Terrain::fill(int x, int h, sf::Color col)

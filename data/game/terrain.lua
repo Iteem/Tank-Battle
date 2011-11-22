@@ -1,7 +1,7 @@
 --classic algorithm using parable to create the terrain
 
 function create()
-	math.randomseed( os.time() ); math.random(); -- the first random number seems to be not very random ;)
+	math.randomseed( os.time() );
 	local P2, P0 
 	local cw = Game.videoMode.width/800
 	local ch = Game.videoMode.height/600
@@ -18,7 +18,6 @@ function create()
 		parable((k * 100) * cw,     (k * 100 + 50)*cw, P0, P1, true, Game.videoMode.height)
 		parable((k * 100 + 50) *cw, (k * 100 + 100)*cw, P1, P2, false, Game.videoMode.height)
 	end
-	print(Game.videoMode.width, Game.videoMode.height)
 end
 
 function parable(x1, x2, y1, y2, w, height)
@@ -34,11 +33,12 @@ function parable(x1, x2, y1, y2, w, height)
 		local h1 = height - c - math.pow(root / x * math.abs(i-b),2) * v
 		local h = math.floor(h1)
 		h1 = h1 - h
-		Game.terrain:setPixel(i,h-1, Color(0, 0, 0, 255 * (1 - h1)));
-		Game.terrain:fill(i, h, Color( 0, 0, 0, 255));
-		--for j = h, height-1 do
-			--t:setPixel(i,j, Color(0, 0, 0, 255));
-		--end
+		Game.terrain:setPixel(i,h-1, Color(0, 0, 0, 255 * (1 - h1))); 
+		--Game.terrain:fill(i, h, Color( 0, 0, 0, 255));
+		col = Color(0, 0, 0, 255)
+		for j = h, height-1 do
+			Game.terrain:setPixel(i,j, col);
+		end
 	end
 	return 
 end

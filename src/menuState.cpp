@@ -18,7 +18,6 @@
 **/
 
 #include "menuState.hpp"
-#include <SFGUI/Align.hpp>
 
 MenuState::MenuState(Shared &shared) :
 State(shared)
@@ -33,41 +32,20 @@ void MenuState::init(void)
     quit = false;
 	start = false;
 
-	app.ShowMouseCursor(false);
-
-    //create GUI
-    myGUI = new sfg::GUI(sf::FloatRect(0,0,myShared.videoMode.Width,myShared.videoMode.Height));
-    myGUI->LoadSkinFromFile("data/menu/skins/black.skin");
-
     //create Buttons
-    quitButton  = sfg::Button::Create(sf::FloatRect(0, 0, 80, 35), "Quit" );
-    startButton = sfg::Button::Create(sf::FloatRect(0, 0, 80, 35), "Start");
+    quitButton  = sfg::Button::Create("Quit");
+    startButton = sfg::Button::Create("Start");
 
-    quitButton->Clicked  = sfg::Slot<sfg::Button::ClickSlot>(&MenuState::onQuitClicked,  this);
-    startButton->Clicked = sfg::Slot<sfg::Button::ClickSlot>(&MenuState::onStartClicked, this);
+    quitButton->OnClick.Connect(&MenuState::onQuitClicked,  this);
+    startButton->OnClick.Connect(&MenuState::onStartClicked, this);
 
-    sfg::AlignWidgetInRect(
-		*quitButton,
-		sf::FloatRect(myGUI->GetRect()),
-		sfg::AlignCenter | sfg::AlignBottom,
-		sf::Vector2f( 0, myShared.videoMode.Height / 20.f )
-	);
-    sfg::AlignWidgetInRect(
-		*startButton,
-		sf::FloatRect(myGUI->GetRect()),
-		sfg::AlignCenter | sfg::AlignTop,
-		sf::Vector2f( 0, myShared.videoMode.Height / 20.f )
-	);
-
-	//and add them to the GUI
-	myGUI->AddWidget(quitButton);
-	myGUI->AddWidget(startButton);
+    startButton->SetPosition(sf::Vector2f(450, 200.));
+    quitButton->SetPosition(sf::Vector2f(450, 400.));
 }
 
 void MenuState::destroy(void)
 {
     app.ShowMouseCursor(true);
-    delete myGUI;
 }
 
 void MenuState::pause(void)
@@ -81,18 +59,19 @@ void MenuState::resume(void)
 State::Next MenuState::update(void)
 {
     sf::Event event;
-    while(app.GetEvent(event)){
+    while(app.PollEvent(event)){
         if(event.Type == sf::Event::Closed){
             return State::Quit;
         }
         if(event.Type == sf::Event::KeyPressed){
-            if(event.Key.Code == sf::Key::Escape){
+            if(event.Key.Code == sf::Keyboard::Escape){
                 return State::Quit;
             }
         }
 
         //update the GUI
-        myGUI->HandleEvent(event);
+        quitButton->HandleEvent(event);
+        startButton->HandleEvent(event);
     }
 
     //check if we need to quit or start the game
@@ -110,15 +89,16 @@ void MenuState::draw(void) const
 {
     app.Clear(sf::Color::White);
 
-    myGUI->Render(app);
+	quitButton->Expose(app);
+	startButton->Expose(app);
 }
 
-void MenuState::onQuitClicked(sfg::Widget::Ptr widget)
+void MenuState::onQuitClicked()
 {
     quit = true;
 }
 
-void MenuState::onStartClicked(sfg::Widget::Ptr widget)
+void MenuState::onStartClicked()
 {
     start = true;
 }

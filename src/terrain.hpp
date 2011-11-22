@@ -39,7 +39,10 @@ class Terrain : public sf::Drawable
     private:
         void Render(sf::RenderTarget& target, sf::Renderer& renderer) const;
 
+        mutable bool needReload;
+
         sf::Image image;
+        mutable sf::Texture tex;
         sf::Sprite sprite;
 };
 

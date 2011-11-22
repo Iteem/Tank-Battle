@@ -36,9 +36,9 @@ Game::~Game()
 int Game::run(void)
 {
     sf::VideoMode videoMode(1024, 768, 32);
-    sf::RenderWindow app(videoMode, "Bla", sf::Style::Fullscreen);
+    sf::RenderWindow app(videoMode, "Bla");//, sf::Style::Fullscreen);
 
-    app.UseVerticalSync(true);
+    app.EnableVerticalSync(true);
 
     Shared shared(app, videoMode);
     State *state;
@@ -66,6 +66,7 @@ int Game::run(void)
                 break;
 
             default:
+				state->destroy();
                 delete state;
                 return 0;
         }

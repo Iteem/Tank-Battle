@@ -21,17 +21,18 @@
 #define IMAGEMANAGER_HPP_INCLUDED
 
 #include "resourceManager.hpp"
+#include <SFML/Graphics/Texture.hpp>
 
 ///the imagemanager
-class ImageManager : public ResourceManager<sf::Image>
+class ImageManager : public ResourceManager<sf::Texture>
 {
     public:
         ImageManager(void) {};
         virtual ~ImageManager(){};
     private:
-        virtual sf::Image *load(const std::string &path)
+        virtual sf::Texture *load(const std::string &path)
         {
-            sf::Image *tmp = new sf::Image;
+            sf::Texture *tmp = new sf::Texture;
             if(!tmp->LoadFromFile(path)){
                 //failed to load image, clean up and return NULL
                 delete tmp;

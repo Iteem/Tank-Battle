@@ -32,26 +32,29 @@ void IntroState::init(void)
     sf::Vector2f factor = sf::Vector2f( myShared.videoMode.Width / 800.f,
                                         myShared.videoMode.Height / 600.f);
 
-    sf::Image *tmp;
+    sf::Texture *tmp;
 
     tmp = IM.get("data/intro/sfmllogo.jpg");
+    tmp->SetSmooth(true);
     if(tmp != NULL){
-        logoSFML.SetImage(*tmp);
+        logoSFML.SetTexture(*tmp);
     }
     logoSFML.SetPosition(150 * factor.x, 400 * factor.y);
     logoSFML.SetScale(0.75 * factor.x, 0.75 * factor.y);
 
     tmp = IM.get("data/intro/sfguilogo.png");
+    tmp->SetSmooth(true);
     if(tmp != NULL){
-        logoSFGUI.SetImage(*tmp);
+        logoSFGUI.SetTexture(*tmp);
     }
     logoSFGUI.SetPosition(400 * factor.x, 150 * factor.y);
     logoSFGUI.SetScale(1 * factor.x, 1 * factor.y);
 
 
     tmp = IM.get("data/intro/luabind.png");
+    tmp->SetSmooth(true);
     if(tmp != NULL){
-        logoLua.SetImage(*tmp);
+        logoLua.SetTexture(*tmp);
     }
     logoLua.SetPosition(50 * factor.x, 50 * factor.y);
     logoLua.SetScale(1 * factor.x, 1 * factor.y);
@@ -74,13 +77,13 @@ void IntroState::resume(void)
 State::Next IntroState::update(void)
 {
     sf::Event event;
-    while(app.GetEvent(event))
+    while(app.PollEvent(event))
     {
         if(event.Type == sf::Event::Closed){
             return State::Quit;
         }
         if(event.Type == sf::Event::KeyPressed){
-            if(event.Key.Code == sf::Key::Escape){
+            if(event.Key.Code == sf::Keyboard::Escape){
                 return State::Quit;
             }else{
                 return State::Menu;
@@ -88,7 +91,7 @@ State::Next IntroState::update(void)
         }
     }
 
-    if(m_Clock.GetElapsedTime() > 2.f){
+    if(m_Clock.GetElapsedTime() > 2000.f){
         return State::Menu;
     }
 

@@ -82,12 +82,12 @@ void GameState::resume(void)
 State::Next GameState::update(void)
 {
     sf::Event event;
-    while(app.GetEvent(event)){
+    while(app.PollEvent(event)){
         if(event.Type == sf::Event::Closed){
             return State::Quit;
         }
         if(event.Type == sf::Event::KeyPressed){
-            if(event.Key.Code == sf::Key::Escape){
+            if(event.Key.Code == sf::Keyboard::Escape){
                 return State::Menu;
             }
         }

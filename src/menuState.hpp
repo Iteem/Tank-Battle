@@ -22,7 +22,7 @@
 
 #include "state.hpp"
 
-#include <SFGUI/GUI.hpp>
+#include <SFGUI/SFGUI.hpp>
 #include <SFGUI/Button.hpp>
 
 ///class for the menu
@@ -41,13 +41,11 @@ class MenuState : public State
         virtual Next update(void);       //update the state, return the next state
         virtual void draw(void) const;   //draw everything
     private:
-        sfg::GUI *myGUI;
-
         sfg::Button::Ptr quitButton;
         sfg::Button::Ptr startButton;
 
-        void onQuitClicked (sfg::Widget::Ptr widget);
-        void onStartClicked(sfg::Widget::Ptr widget);
+        void onQuitClicked ();
+        void onStartClicked();
 
         bool quit;
         bool start;

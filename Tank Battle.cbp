@@ -13,17 +13,14 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add option="-DSFML_DYNAMIC" />
-					<Add option="-DSFGUI_DYNAMIC" />
 				</Compiler>
 				<Linker>
 					<Add option="-lsfgui-d" />
-					<Add option="-lyaml-cpp" />
-					<Add option="-lsfml2-network-d" />
-					<Add option="-lsfml2-audio-d" />
-					<Add option="-lsfml2-graphics-d" />
-					<Add option="-lsfml2-window-d" />
-					<Add option="-lsfml2-system-d" />
+					<Add option="-lsfml-network-d" />
+					<Add option="-lsfml-audio-d" />
+					<Add option="-lsfml-graphics-d" />
+					<Add option="-lsfml-window-d" />
+					<Add option="-lsfml-system-d" />
 					<Add option="-lluabindd" />
 					<Add option="-llua" />
 				</Linker>
@@ -35,18 +32,17 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add option="-DSFML_DYNAMIC" />
-					<Add option="-DSFGUI_DYNAMIC" />
+					<Add option="-DSFGUI_STATIC" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add option="-lsfgui" />
+					<Add option="-lsfgui-s" />
 					<Add option="-lyaml-cpp" />
-					<Add option="-lsfml2-network" />
-					<Add option="-lsfml2-audio" />
-					<Add option="-lsfml2-graphics" />
-					<Add option="-lsfml2-window" />
-					<Add option="-lsfml2-system" />
+					<Add option="-lsfml-network" />
+					<Add option="-lsfml-audio" />
+					<Add option="-lsfml-graphics" />
+					<Add option="-lsfml-window" />
+					<Add option="-lsfml-system" />
 					<Add option="-lluabind" />
 					<Add option="-llua" />
 				</Linker>
@@ -92,6 +88,7 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-std=c++0x" />
 			<Add option="-Wall" />
 			<Add directory="src" />
 		</Compiler>
